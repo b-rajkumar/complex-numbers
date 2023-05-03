@@ -1,54 +1,46 @@
-const makeComplexNumber = function({realPart, imaginaryPart}) {
+const complexNumber = function(real, imaginary) {
   const getRealPart = function() {
-    return realPart;
+    return real;
   };
 
   const getImaginaryPart = function() {
-    return imaginaryPart;
-  };
-
-  const getComplexNumber = function() {
-    return {realPart, imaginaryPart};
+    return imaginary;
   };
 
   const add = function(addend) {
-    const real = realPart + addend.getRealPart();
-    const imaginary = imaginaryPart + addend.getImaginaryPart();
+    const realSum = real + addend.getRealPart();
+    const imaginarySum = imaginary + addend.getImaginaryPart();
 
-    return {realPart: real, imaginaryPart: imaginary}
+    return {real: realSum, imaginary: imaginarySum}
   };
 
   const multiply = function(multiplicand) {
-    const real = realPart * multiplicand.getRealPart() - (imaginaryPart * multiplicand.getImaginaryPart()); 
-    const imaginary = realPart * multiplicand.getImaginaryPart() + imaginaryPart * multiplicand.getRealPart();
+    const realProd = real * multiplicand.getRealPart() - (imaginary * multiplicand.getImaginaryPart()); 
+    const imaginaryProd = real * multiplicand.getImaginaryPart() + imaginary * multiplicand.getRealPart();
 
-    return {realPart: real, imaginaryPart: imaginary}
+    return {real: realProd, imaginary: imaginaryProd}
   };
 
   const display = function() {
-    const symbol = (imaginaryPart > 0)? '+' : '';
+    const symbol = (imaginary > 0)? '+' : '';
     let complexNumber = '';
 
-    if(realPart === 0) {
-      complexNumber = imaginaryPart + 'i';
+    if(real !== 0) {
+      complexNumber += real;
     }
 
-    if(imaginaryPart === 0) {
-      complexNumber = realPart + '';
+    if(real !== 0 && imaginary !== 0) {
+      complexNumber += symbol;
     }
 
-    if(realPart === 0 && imaginaryPart === 0) {
-      complexNumber = ''
-    };
-
-    if(realPart !== 0 && imaginaryPart !== 0) {
-      complexNumber = realPart + symbol + imaginaryPart + 'i';
-    };
+    if(imaginary !== 0) {
+      complexNumber += imaginary + 'i';
+    }
 
     return complexNumber;
   };
 
-  return {getImaginaryPart, getRealPart, display, multiply, add, getComplexNumber};
+  return {getImaginaryPart, getRealPart, display, multiply, add};
 };
 
-exports.makeComplexNumber = makeComplexNumber;
+exports.complexNumber = complexNumber;
