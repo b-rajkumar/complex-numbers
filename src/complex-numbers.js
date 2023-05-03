@@ -1,4 +1,4 @@
-const generateComplexNumber = function({realPart, imaginaryPart}) {
+const makeComplexNumber = function({realPart, imaginaryPart}) {
   const getRealPart = function() {
     return realPart;
   };
@@ -7,21 +7,48 @@ const generateComplexNumber = function({realPart, imaginaryPart}) {
     return imaginaryPart;
   };
 
-  return {getRealPart, getImaginaryPart};
+  const getComplexNumber = function() {
+    return {realPart, imaginaryPart};
+  };
+
+  const add = function(addend) {
+    const real = realPart + addend.getRealPart();
+    const imaginary = imaginaryPart + addend.getImaginaryPart();
+
+    return {realPart: real, imaginaryPart: imaginary}
+  };
+
+  const multiply = function(multiplicand) {
+    const real = realPart * multiplicand.getRealPart() - (imaginaryPart * multiplicand.getImaginaryPart()); 
+    const imaginary = realPart * multiplicand.getImaginaryPart() + imaginaryPart * multiplicand.getRealPart();
+
+    return {realPart: real, imaginaryPart: imaginary}
+  };
+
+  const display = function() {
+    const symbol = (imaginaryPart > 0)? '+' : '';
+    let complexNumber = '';
+
+    if(realPart === 0) {
+      complexNumber = imaginaryPart + 'i';
+    }
+
+    if(imaginaryPart === 0) {
+      complexNumber = realPart + '';
+    }
+
+    if(realPart === 0 && imaginaryPart === 0) {
+      complexNumber = ''
+    };
+
+    if(realPart !== 0 && imaginaryPart !== 0) {
+      complexNumber = realPart + symbol + imaginaryPart + 'i';
+    };
+
+    return complexNumber;
+  };
+
+  return {getImaginaryPart, getRealPart, display, multiply, add, getComplexNumber};
 };
 
-const displayComplexNumber = function({realPart, imaginaryPart}) {
-  const symbol = (imaginaryPart > 0)? '+' : '';
-
-  if(realPart === 0) {
-    return symbol + imaginaryPart + 'i';
-  }
-
-  if(imaginaryPart === 0) {
-    return realPart + '';
-  }
-
-  return realPart + symbol + imaginaryPart + 'i';
-};
-
-exports.generateComplexNumber = generateComplexNumber;
+exports.makeComplexNumber = makeComplexNumber;
