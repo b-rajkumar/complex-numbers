@@ -11,14 +11,14 @@ const complexNumber = function(real, imaginary) {
     const realSum = real + addend.getRealPart();
     const imaginarySum = imaginary + addend.getImaginaryPart();
 
-    return {real: realSum, imaginary: imaginarySum}
+    return complexNumber(realSum, imaginarySum);
   };
 
   const multiply = function(multiplicand) {
-    const realProd = real * multiplicand.getRealPart() - (imaginary * multiplicand.getImaginaryPart()); 
+    const realProd = real * multiplicand.getRealPart() - imaginary * multiplicand.getImaginaryPart(); 
     const imaginaryProd = real * multiplicand.getImaginaryPart() + imaginary * multiplicand.getRealPart();
 
-    return {real: realProd, imaginary: imaginaryProd}
+    return complexNumber(realProd, imaginaryProd);
   };
 
   const display = function() {
